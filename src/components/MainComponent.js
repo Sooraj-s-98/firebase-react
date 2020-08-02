@@ -72,28 +72,57 @@ class Main extends Component {
     }
 
     const DishWithId = ({match}) => {
+
+      if(this.props.favorites.favorites!=null){
+      
+      if(Array.isArray(this.props.favorites.favorites))
+      
+      this.props.favorites.favorites=this.props.favorites.favorites[0];
+      
+      }
+      
       return(
-        (this.props.auth.isAuthenticated && this.props.favorites.favorites)
-        ?
-        <DishDetail dish={this.props.dishes.dishes.filter((dish) => dish._id === match.params.dishId)[0]}
-          isLoading={this.props.dishes.isLoading}
-          errMess={this.props.dishes.errMess}
-          comments={this.props.comments.comments.filter((comment) => comment.dish === match.params.dishId)}
-          commentsErrMess={this.props.comments.errMess}
-          postComment={this.props.postComment}
-          favorite={this.props.favorites.favorites.dishes.some((dish) => dish === match.params.dishId)}
-          postFavorite={this.props.postFavorite}
-          />
+      
+      (this.props.auth.isAuthenticated && !this.props.favorites.isLoading)
+      
+      ?
+      
+      
+<DishDetail dish={this.props.dishes.dishes.filter((dish) => dish._id === match.params.dishId)[0]}
+
+isLoading={this.props.dishes.isLoading}
+
+errMess={this.props.dishes.errMess}
+
+comments={this.props.comments.comments.filter((comment) => comment.dish === match.params.dishId)}
+
+commentsErrMess={this.props.comments.errMess}
+
+postComment={this.props.postComment}
+
+favorite={this.props.favorites.favorites.dishes.some((dish) => dish._id === match.params.dishId)}
+
+postFavorite={this.props.postFavorite}
+
+/>
         :
-        <DishDetail dish={this.props.dishes.dishes.filter((dish) => dish._id === match.params.dishId)[0]}
-          isLoading={this.props.dishes.isLoading}
-          errMess={this.props.dishes.errMess}
-          comments={this.props.comments.comments.filter((comment) => comment.dish === match.params.dishId)}
-          commentsErrMess={this.props.comments.errMess}
-          postComment={this.props.postComment}
-          favorite={false}
-          postFavorite={this.props.postFavorite}
-          />
+<DishDetail dish={this.props.dishes.dishes.filter((dish) => dish._id === match.params.dishId)[0]}
+
+isLoading={this.props.dishes.isLoading}
+
+errMess={this.props.dishes.errMess}
+
+comments={this.props.comments.comments.filter((comment) => comment.dish === match.params.dishId)}
+
+commentsErrMess={this.props.comments.errMess}
+
+postComment={this.props.postComment}
+
+favorite={false}
+
+postFavorite={this.props.postFavorite}
+
+/>
       );
     }
 
